@@ -485,11 +485,19 @@ GameServer.prototype.spawnPlayer = function(player, pos, mass) {
         pos = this.nodeHandler.getRandomSpawn();
     }
 
+<<<<<<< HEAD
     // Reset player's lose multiplier for sake of playability
     player.massLossMult = 0;
 
     // Reset player's scramblers
     player.resetScramble();
+=======
+GameServer.prototype.updateCells = function() {
+    // Loop through all player cells
+    var massDecay = 1 - (this.config.playerMassDecayRate * this.gameMode.decayMod);
+    for (var i = 0; i < this.nodesPlayer.length; i++) {
+        var cell = this.nodesPlayer[i];
+>>>>>>> parent of bb6eaf4... Refactor code
 
     // Spawn player and add to world
     var cell = new Entity.PlayerCell(this.getNextNodeId(), player, pos, mass, this);

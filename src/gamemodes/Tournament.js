@@ -67,7 +67,9 @@ Tournament.prototype.getSpectate = function() {
     this.rankOne = this.contenders[index];
 };
 
-Tournament.prototype.prepare = function(gameServer) {
+// Override
+
+Tournament.prototype.onServerInit = function(gameServer) {
     // Remove all cells
     var len = gameServer.nodes.length;
     for (var i = 0; i < len; i++) {
@@ -120,6 +122,7 @@ Tournament.prototype.formatTime = function(time) {
     return min + ":" + sec;
 };
 
+<<<<<<< HEAD
 // Override
 
 Tournament.prototype.onServerInit = function(gameServer) {
@@ -127,6 +130,9 @@ Tournament.prototype.onServerInit = function(gameServer) {
 };
 
 Tournament.prototype.onPlayerSpawn = function(gameServer, player) {
+=======
+Tournament.prototype.onPlayerSpawn = function(gameServer,player) {
+>>>>>>> parent of bb6eaf4... Refactor code
     // Only spawn players if the game hasnt started yet
     if ((this.gamePhase == 0) && (this.contenders.length < this.maxContenders)) {
         player.color = gameServer.getRandomColor(); // Random color
@@ -225,7 +231,7 @@ Tournament.prototype.updateLB = function(gameServer) {
                 gameServer.startingFood();
             } else {
                 lb[3] = "Game restarting in";
-                lb[4] = this.timer.toString();
+		lb[4] = this.timer.toString();
                 this.timer--;
             }
             break;

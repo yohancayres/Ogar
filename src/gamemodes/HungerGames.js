@@ -127,11 +127,41 @@ HungerGames.prototype.onPlayerDeath = function(gameServer) {
 // Override
 
 HungerGames.prototype.onServerInit = function(gameServer) {
-    // Prepare
-    this.prepare(gameServer);
+    // Remove all cells
+    var len = gameServer.nodes.length;
+    for (var i = 0; i < len; i++) {
+        var node = gameServer.nodes[0];
+
+        if (!node) {
+            continue;
+        }
+
+        gameServer.removeNode(node);
+    }
+    
+    gameServer.bots.loadNames();
 
     // Resets spawn points
     this.contenderSpawnPoints = this.baseSpawnPoints.slice();
+
+    // Pauses the server
+    gameServer.run = false;
+    this.gamePhase = 0;
+
+    // Get config values
+    if (gameServer.config.tourneyAutoFill > 0) {
+        this.timer = gameServer.config.tourneyAutoFill;
+        this.autoFill = true;
+        this.autoFillPlayers = gameServer.config.tourneyAutoFillPlayers;
+    }
+
+    // Handles disconnections
+    this.dcTime = gameServer.config.playerDisconnectTime;
+    gameServer.config.playerDisconnectTime = 0;
+    gameServer.config.MinMassDecay = gameServer.config.playerStartMass;
+
+    this.prepTime = gameServer.config.tourneyPrepTime;
+    this.endTime = gameServer.config.tourneyEndTime;
 
     // Override config values
     if (gameServer.config.serverBots > this.maxContenders) {
