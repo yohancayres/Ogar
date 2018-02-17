@@ -123,6 +123,7 @@ Tournament.prototype.formatTime = function(time) {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Override
 
 Tournament.prototype.onServerInit = function(gameServer) {
@@ -131,6 +132,8 @@ Tournament.prototype.onServerInit = function(gameServer) {
 
 Tournament.prototype.onPlayerSpawn = function(gameServer, player) {
 =======
+=======
+>>>>>>> parent of bb6eaf4... Refactor code
 Tournament.prototype.onPlayerSpawn = function(gameServer,player) {
 >>>>>>> parent of bb6eaf4... Refactor code
     // Only spawn players if the game hasnt started yet
